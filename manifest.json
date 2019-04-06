@@ -1,0 +1,6 @@
+{
+	"name": "SharedItemPickup",
+	"version_number": "1.0.0",
+	"website_url: "https://github.com/risk-of-thunder",
+	"description": "Gives a copy of each picked up item to every live player."
+}
