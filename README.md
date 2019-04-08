@@ -14,7 +14,8 @@ Replaces Assembly-CSharp.dll in:
 **Backup current dll**
 
 ## Source/Do It Yourself
-Edits Assembly-CSharp.dll -> RoR2 -> GenericPickupController -> GrantItem() -> line 214
+Step 1:
+Edit Assembly-CSharp.dll -> RoR2 -> GenericPickupController -> GrantItem() -> line 214
 
 Change:
 inventory.GiveItem(this.pickupIndex.itemIndex, 1);
@@ -25,6 +26,21 @@ foreach (PlayerCharacterMasterController playerCharacterMasterController in Play
 	if (playerCharacterMasterController.master.alive)
 	{
 		playerCharacterMasterController.master.GetBody().inventory.GiveItem(this.pickupIndex.itemIndex, 1);
+	}
+}
+
+Step 2:
+Edit Assembly-CSharp.dll -> RoR2 -> PurchaseInteraction -> OnInteractionBegin() -> line 321
+
+Change:
+inventory.RemoveItem(itemIndex3, 1);
+
+Into:
+foreach (PlayerCharacterMasterController playerCharacterMasterController in PlayerCharacterMasterController.instances)
+{
+	if (playerCharacterMasterController.master.alive && playerCharacterMasterController.master.GetBody().inventory.GetItemCount(itemIndex3) != 0)
+	{
+		playerCharacterMasterController.master.GetBody().inventory.RemoveItem(itemIndex3, 1);
 	}
 }
 
